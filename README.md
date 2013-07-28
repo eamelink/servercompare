@@ -1,7 +1,7 @@
 Server Compare
 ==============
 
-{{servercompare}} is a utility to compare configurations between two remote servers.
+`servercompare` is a Scala utility to compare configurations between two remote servers.
 
 It takes to hostnames and a directory as a parameter, and compares that directory on the two machines. It will list files that are only on one of the two machines, and can open a diff tool to show the differences between files that exist on both but are different.
 
