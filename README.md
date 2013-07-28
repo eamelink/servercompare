@@ -23,6 +23,19 @@ Prerequisites
 * Agent forwarding setup, so that from the reference machine, you can access the test machine without password (because we use `rsync` between these machines to check for file differences)
 * Your user must be able to read the directory that is compared on both machines
 
+Tricks
+======
+
+Some things are not readily compared with this tool, but if you can manage to get the changes into a file somehow, you can use this tool to compare.
+
+For example, run the following commands in a temporary directory on multiple machines, and then run this tool on that directory:
+
+    dpkg --get-selections > packages
+    dpkg-query -W -f='${Conffiles}\n' '*' | awk 'OFS="  "{print $2,$1}' | LANG=C md5sum -c 2>/dev/null | awk -F': ' '$2 !~ /OK/{print $1}' | sort > changed-config-files 
+    xargs md5sum < changed-config-files > changed-configs-md5sums
+
+
+
 Contributing
 ============
 
